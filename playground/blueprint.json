@@ -1,0 +1,19 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "login": true,
+  "steps": [
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "風評被害対策｜独立WordPressテスト環境",
+        "blogdescription": "Elementorなし・フォームなしのテーマ検証環境",
+        "blog_public": 0
+      }
+    }
+  ]
+}
