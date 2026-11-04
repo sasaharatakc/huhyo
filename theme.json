@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "settings": {
+    "layout": {
+      "contentSize": "1120px",
+      "wideSize": "1280px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "navy",
+          "name": "ネイビー",
+          "color": "#0a2741"
+        },
+        {
+          "slug": "aqua",
+          "name": "アクア",
+          "color": "#15b7c3"
+        },
+        {
+          "slug": "white",
+          "name": "白",
+          "color": "#ffffff"
+        }
+      ]
+    },
+    "spacing": {
+      "units": [
+        "px",
+        "rem",
+        "%",
+        "vw"
+      ]
+    },
+    "appearanceTools": true
+  }
+}
