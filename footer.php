@@ -1,0 +1,1 @@
+</main><footer class="site-footer"><div class="wrap"><strong>株式会社ネット風評被害対策</strong><p>ネット風評被害の監視・対策を支援します。</p><small>Copyright &copy; <?php echo esc_html(date('Y')); ?> Net Fuhyouhigaitaisaku</small></div></footer><?php wp_footer(); ?></body></html>
