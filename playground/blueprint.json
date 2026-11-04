@@ -1,6 +1,6 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
-  "landingPage": "/wp-admin/",
+  "landingPage": "/",
   "preferredVersions": {
     "php": "8.3",
     "wp": "latest"
@@ -10,9 +10,19 @@
     {
       "step": "setSiteOptions",
       "options": {
-        "blogname": "風評被害対策｜独立WordPressテスト環境",
+        "blogname": "ネット風評被害対策",
         "blogdescription": "Elementorなし・フォームなしのテーマ検証環境",
         "blog_public": 0
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "url",
+        "url": "https://github.com/sasaharatakc/huhyo/archive/refs/heads/main.zip"
+      },
+      "options": {
+        "activate": true
       }
     }
   ]
