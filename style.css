@@ -1,0 +1,29 @@
+/*
+Theme Name: Fuhyo Custom
+Theme URI: https://net-fuhyohigai-taisaku.co.jp/
+Author: Site Development
+Description: Elementor-free custom WordPress theme for the reputation monitoring website.
+Version: 0.1.1
+Requires PHP: 8.0
+Text Domain: fuhyo-custom
+*/
+:root{--ink:#132b3c;--navy:#0a2741;--aqua:#15b7c3;--light:#f3f8fa}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;line-height:1.8}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.site-header{background:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 14px #0a274112}.head-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-weight:800;font-size:18px}.nav{display:flex;gap:22px;flex-wrap:wrap;font-size:14px}.nav a:hover{color:#008f9b}.hero{background:linear-gradient(120deg,#082942,#0b5270 65%,#13a7b4);color:#fff;padding:110px 0 120px}.eyebrow{letter-spacing:.15em;font-weight:700;color:#9ef4f2}.hero h1{font-size:clamp(36px,5.4vw,70px);line-height:1.35;margin:20px 0}.hero p{max-width:700px;font-size:18px}.btn{display:inline-block;padding:13px 25px;border-radius:6px;background:#0fc3c9;color:#062b40;font-weight:700;margin-top:22px}.section{padding:84px 0}.section.alt{background:var(--light)}.section h2{font-size:clamp(27px,3.5vw,40px);line-height:1.4;margin:0 0 28px}.lead{max-width:830px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:32px}.card{background:white;padding:28px;border:1px solid #e2eaee;border-radius:12px;box-shadow:0 10px 24px #173e4e09}.card h3{margin-top:0;font-size:19px}.card p{margin-bottom:0}.step{border-left:3px solid var(--aqua);padding:0 0 24px 22px}.step strong{display:block}.faq details{padding:18px 0;border-bottom:1px solid #d7e3e9}.faq summary{cursor:pointer;font-weight:700}.site-footer{background:#0b2538;color:#e5f5f7;padding:45px 0}.site-footer small{opacity:.75}@media(max-width:760px){.head-inner{align-items:flex-start;flex-direction:column;padding:14px 0}.nav{gap:10px 17px}.hero{padding:75px 0}.cards{grid-template-columns:1fr}.section{padding:56px 0}}
+
+/* Staging responsive and accessibility improvements (2026-11-04) */
+html{overflow-x:clip;scroll-padding-top:90px}
+body{overflow-x:clip}
+.skip-link{position:absolute;left:-10000px;top:auto;padding:8px 12px;background:#fff;z-index:100}
+.skip-link:focus{position:fixed;left:10px;top:10px}
+.mobile-toggle{display:none;border:1px solid #c6dade;background:#fff;border-radius:6px;color:var(--ink);padding:8px 12px;align-items:center;gap:8px;font:inherit;font-size:14px;cursor:pointer}
+.nav-list{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+@media(max-width:760px){
+  .head-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;min-height:68px;padding:12px 0}
+  .brand{font-size:15px;line-height:1.4}
+  .mobile-toggle{display:inline-flex}
+  .nav{grid-column:1/-1;flex-direction:column;align-items:stretch;gap:10px;width:100%;border-top:1px solid #e1ebee;padding:10px 0}
+  .nav-list{flex-direction:column;align-items:stretch;gap:10px}
+  .nav a{display:block;min-height:40px;padding:5px 0}
+  .js .nav{display:none}
+  .js .nav.is-open{display:flex}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
