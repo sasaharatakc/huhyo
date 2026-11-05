@@ -1,0 +1,65 @@
+[
+  {
+    "route": "/",
+    "status": 200,
+    "bytes": 198752,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/top/ai/",
+    "status": 200,
+    "bytes": 131597,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/top/ai監視-webモニタリング/",
+    "status": 200,
+    "bytes": 220665,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/top/fuhyo/",
+    "status": 200,
+    "bytes": 126894,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/top/keyword/",
+    "status": 200,
+    "bytes": 138119,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/top/reverse-ai/",
+    "status": 200,
+    "bytes": 154973,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/top/reverse-seo/",
+    "status": 200,
+    "bytes": 131754,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/top/suggest/",
+    "status": 200,
+    "bytes": 139995,
+    "phpError": false,
+    "elementorJS": false
+  },
+  {
+    "route": "/thanks/",
+    "status": 200,
+    "bytes": 82236,
+    "phpError": false,
+    "elementorJS": false
+  }
+]
