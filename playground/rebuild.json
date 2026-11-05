@@ -1,0 +1,35 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "login": true,
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "ネット風評被害対策・再現テスト",
+        "blog_public": 0
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/sasaharatakc/huhyo/wordpress-migration-20261105/releases/fuhyo-preview.zip"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require '/wordpress/wp-load.php'; wp_set_current_user(1); $result=fuhyo_import_pages(); if(is_wp_error($result)) throw new Exception($result->get_error_message());"
+    }
+  ]
+}
