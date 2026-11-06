@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 import shutil,json,zipfile,re
 from urllib.parse import urlparse,unquote,urljoin
 root=Path(__file__).parent
-src=root/'dist'; out=root/'wordpress-build-v2'/'fuhyo-reproduction'
+src=(root/'dist') if (root/'dist').exists() else root/'.sites-checkout'/'dist'
+out=root/'wordpress-build-v2'/'fuhyo-reproduction'
 out.mkdir(parents=True,exist_ok=True)
 dependencies=set(); missing=set()
 def asset(url,base='/'):
@@ -28,7 +29,10 @@ def asset(url,base='/'):
             p=urlparse(urljoin('/'+path,u))
             if not p.netloc or p.netloc=='net-fuhyohigai-taisaku.co.jp':
                 import posixpath
-                return 'url("'+posixpath.relpath(unquote(p.path).lstrip('/'),str(Path(path).parent))+'")'
+                resource=unquote(p.path).lstrip('/')
+                if resource in missing:
+                    return 'url("https://net-fuhyohigai-taisaku.co.jp'+p.path+'")'
+                return 'url("'+posixpath.relpath(resource,str(Path(path).parent))+'")'
             return m.group(0)
         target.write_text(re.sub(r'url\(([^)]+)\)',repl,css))
     else:shutil.copy2(f,target)
@@ -71,7 +75,10 @@ add_action('template_redirect',function(){
  status_header(200);
  $html=file_get_contents(__DIR__.'/pages/'.$routes[$path]);
  $asset=esc_url(get_template_directory_uri().'/static');
- $html=preg_replace('~(?:https://net-fuhyohigai-taisaku.co.jp)?/(wp-content|wp-includes|assets)/~',$asset.'/$1/',$html);
+ $html=preg_replace_callback('~(?:https://net-fuhyohigai-taisaku.co.jp)?/((?:wp-content|wp-includes|assets)/[^\\s"\\\'<>),]+)~',function($m)use($asset){
+   $path=rawurldecode(explode('?', $m[1])[0]);
+   return is_file(__DIR__.'/static/'.$path)?$asset.'/'.$m[1]:'https://net-fuhyohigai-taisaku.co.jp/'.$m[1];
+ },$html);
  $html=str_replace('"/scroll-fix.css"','"'.esc_url(get_template_directory_uri().'/runtime.css').'"',$html);
  foreach(array_keys($routes) as $route){$html=str_replace('href="'.$route.'"','href="'.esc_url(home_url($route)).'"',$html);}
  $html=str_replace('</head>','<link rel="stylesheet" href="'.esc_url(get_template_directory_uri().'/runtime.css').'" /></head>',$html);
@@ -100,3 +107,4 @@ with zipfile.ZipFile(root/'wordpress-build-v2'/'fuhyo-reproduction.zip','w',zipf
 report={'routes':routes,'assets':len(dependencies),'missing':sorted(missing),'zip_bytes':(out.parent/'fuhyo-reproduction.zip').stat().st_size}
 (out.parent/'build-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
 print(json.dumps(report,ensure_ascii=False))
+
