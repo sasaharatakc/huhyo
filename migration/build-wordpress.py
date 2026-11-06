@@ -61,7 +61,7 @@ for f in [src/'index.html',*sorted((src/'top').rglob('index.html')),src/'thanks/
     name=str(len(routes))+'.html'; routes[route]=name
     (out/'pages'/name).write_text(str(soup))
 (out/'routes.json').write_text(json.dumps(routes,ensure_ascii=False,indent=2))
-(out/'style.css').write_text('/*\nTheme Name: Fuhyo Reproduction\nVersion: 0.3.0\nRequires PHP: 8.1\nDescription: Non-blog captured layout, independent of Elementor plugin.\n*/')
+(out/'style.css').write_text('/*\nTheme Name: Fuhyo Reproduction\nVersion: 0.3.1\nRequires PHP: 8.1\nDescription: Non-blog captured layout, independent of Elementor plugin.\n*/')
 (out/'functions.php').write_text('''<?php
 defined('ABSPATH') || exit;
 add_action('after_setup_theme',function(){add_theme_support('title-tag');});
@@ -72,6 +72,10 @@ add_action('template_redirect',function(){
  if($base && strpos($path,$base)===0) $path='/'.substr($path,strlen($base));
  $path='/'.trim($path,'/').'/'; if($path==='//')$path='/';
  if(!isset($routes[$path]))return;
+ global $wp_query;
+ $wp_query->is_404=false;
+ remove_action('wp_head','_wp_render_title_tag',1);
+ remove_action('wp_head','rel_canonical');
  status_header(200);
  $html=file_get_contents(__DIR__.'/pages/'.$routes[$path]);
  $asset=esc_url(get_template_directory_uri().'/static');
@@ -80,7 +84,12 @@ add_action('template_redirect',function(){
    return is_file(__DIR__.'/static/'.$path)?$asset.'/'.$m[1]:'https://net-fuhyohigai-taisaku.co.jp/'.$m[1];
  },$html);
  $html=str_replace('"/scroll-fix.css"','"'.esc_url(get_template_directory_uri().'/runtime.css').'"',$html);
- foreach(array_keys($routes) as $route){$html=str_replace('href="'.$route.'"','href="'.esc_url(home_url($route)).'"',$html);}
+ $html=preg_replace_callback('~href="(/[^"<>]*)"~',function($m)use($routes){
+   if(strpos($m[1],'//')===0)return $m[0];
+   $target=rawurldecode(parse_url(html_entity_decode($m[1]),PHP_URL_PATH));
+   if(!isset($routes[$target]))return $m[0];
+   return 'href="'.esc_url(home_url(html_entity_decode($m[1]))).'"';
+ },$html);
  $html=str_replace('</head>','<link rel="stylesheet" href="'.esc_url(get_template_directory_uri().'/runtime.css').'" /></head>',$html);
  $html=str_replace('</body>','<script src="'.esc_url(get_template_directory_uri().'/runtime.js').'" defer></script></body>',$html);
  ob_start();wp_head();$head=ob_get_clean();
