@@ -1,13 +1,24 @@
-# Migration checkpoint
+# WordPress reproduction checkpoint — 2026-11-06
 
-2026-11-06: NOT COMPLETE; do not advertise visual parity.
+Not complete. Scope: nine non-blog routes; no contact forms, no Elementor runtime.
 
-Source: Sites appgprj_6ae5cd13de9c8191bb82fe10c0380884 at commit 353687a67dc65c56fba52fa32aecb2641c805412. Recover source through Sites credentials, then run build-wordpress.py in its root.
+## Verified
+- v0.3.0: fresh WordPress CLI instance serves all nine routes with HTTP 200, no detected PHP errors.
+- 101 unique HTML-linked local assets return HTTP 200. This does not cover all CSS/srcset dependencies.
+- v0.3.0 ZIP installed successfully via WordPress Playground admin (WordPress 7.1.4 observed in UI).
+- Browser theme activation was blocked by automatic approval review: custom ZIP PHP execution requires user confirmation at action time. No bypass attempted.
 
-Scope: 9 non-blog routes. Forms excluded. Original static CSS/HTML retained, Elementor JS removed. FAQ and menu replacements written; browser behavior remains unverified. Source contains plugin-named CSS directories but no PHP plugins installed.
+## Latest source
+- v0.3.1 fixes internal fragment links for subdirectory installation, duplicate wp_head title, and WP 404 query flag.
+- Python build and JS syntax checks pass. v0.3.1 has not yet been installed or runtime-tested after the activation block.
+- Built ZIP: 62,808,458 bytes; 307 captured assets; nine HTML routes.
+- ZIP saved as fuhyo-reproduction.zip, Library id libfile_c15c76e1642c8191b5cbfa0a9e10e181.
 
-Build output: wordpress-build-v2/fuhyo-reproduction.zip, 62,808,180 bytes. 307 dependent assets. HTTP test in fresh WordPress PHP 8.3: 9/9 return 200, no PHP errors, no Elementor script URLs.
+## Remaining
+1. Obtain confirmation to activate custom theme in isolated WordPress Playground; upload latest ZIP and activate.
+2. Desktop/mobile visual and menu/FAQ/carousel interaction QA; correct differences.
+3. Two source-media files absent from capture (Cybersecurity GIF and Japanese-named MP4); currently retain original-domain URLs, availability unverified.
+4. Publish verified theme package to GitHub and update playground/blueprint.json. Existing launcher still installs old simplified theme and must NOT be described as completed reproduction.
 
-Remaining: missing source GIF and MP4; fix external-media URL handling; inspect CSS and srcset resolution; visual comparison at mobile/tablet/desktop; test navigation/FAQ/carousel behavior; confirm hooks and page editing; test ZIP upload; publish only verified build. Current public GitHub theme/launcher is still the earlier simplified theme, not this migration.
-
-2026-11-07 checkpoint: Recovered original source after scratch reset. Fixed asset rewriting to preserve original URLs when GIF/video files are absent, including CSS. Rebuilt 9 routes / 307 assets, ZIP 62,808,345 bytes. Python compilation and runtime.js syntax checks pass. Updated PHP has not yet been re-tested in WordPress; previous HTTP report applies only to prior build. Visual/interaction QA and ZIP install remain unverified. No new deployment.
+Original source: https://net-fuhyohigai-taisaku.co.jp/
+Captured static reference: https://net-fuhyohigai-mobile-preview.takesasa557.chatgpt.site
